@@ -1,4 +1,4 @@
-from distutils.core import setup
+from setuptools import setup
 
 setup( name='NVR',
        version='0.0.0',
@@ -10,9 +10,8 @@ setup( name='NVR',
        install_requires=[
            'numpy>=1.11.0',
            'pandas>=0.17.1',
-           'scipy>=0.17.0',
            'networkx',
-           
+           'scipy>=0.17.0'
        ],
      )
 
