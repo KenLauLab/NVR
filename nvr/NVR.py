@@ -65,7 +65,7 @@ def pwArcsinh(inputArray,constant):
     transformed=np.zeros_like(inputArray,dtype=float) #initialize the output array
     print ("Completion:")
     for i in range(0,inputArray.shape[0]):
-        print (((i/inputArray.shape[0])*100),end='\r')#progress meter 
+        #print (((i/inputArray.shape[0])*100),end='\r')#progress meter 
         holder[i,:]=(inputArray[i,:]/countsum[i])*constant #divide each genes counts by total number of counts in cell
         transformed[i,:]=np.arcsinh((holder[i,:]/constant*1000)) #do arcsinh transform for each element of matrix
     return transformed
@@ -138,7 +138,7 @@ def selection_val(traj_exp,adj_mat):
     print ("Start neighborhood variance calculation") 
     print ("Completion:")
     for i in range(0,r): #start of dev_ij calculation loop
-        print (((i/r)*100),end='\r') #progress meter
+        #print (((i/r)*100),end='\r') #progress meter
         for j in range(0,c):
             dev[i,j] = dev_ij(i,j,traj_exp,adj_mat) #this is the part that takes the longest
     print ("Finished neighborhood variance calculation")

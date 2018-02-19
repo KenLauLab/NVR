@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup( name='NVR',
-       version='0.0.0',
+       version='0.0.1',
        description='python implementation of gene feature selection used in Welch et al.,2016',
        url='https://github.com/KenLauLab/NVR',
        author='Bob Chen',
