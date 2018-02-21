@@ -133,7 +133,7 @@ def selection_val(traj_exp,adj_mat):
     dev=np.zeros_like(traj_exp,dtype=float) #initialize matrix to store dev_ij values
     val=np.zeros(traj_exp.shape[1],dtype=float) #initialize val matrix to store variance values
     print ("Start global variance calculation")
-    ivar=np.var(traj_exp,axis=0,dtype=float,ddof=1) #calculate variance in traj_exp, this is the global variance matrix
+    ivar=np.var(traj_exp,axis=0,ddof=1) #calculate variance in traj_exp, this is the global variance matrix
     print ("Finished global variance calculation")
     print ("Start neighborhood variance calculation") 
     print ("Completion:")
@@ -142,7 +142,7 @@ def selection_val(traj_exp,adj_mat):
         for j in range(0,c):
             dev[i,j] = dev_ij(i,j,traj_exp,adj_mat) #this is the part that takes the longest
     print ("Finished neighborhood variance calculation")
-    rowsumdev=np.sum(dev,axis=0,dtype=float) #axis-wise sum of deviations calculated between i and j
+    rowsumdev=np.sum(dev,axis=0) #axis-wise sum of deviations calculated between i and j
     print ("Start global to neighborhood variance ratio calculation")
     for i in range(0,c): #set values to variance/deviation calculation in loop
         if rowsumdev[i]!=0: #pretty much just throw out anything that has devsum=0, when considering deviation sums of 0, we could get a divide by zero error
