@@ -80,9 +80,9 @@ def adaptive_knn_graph(traj_dist,k):
     :return adj_mat: ndarray representing the calculated adjacency matrix
     '''
     adj_mat = np.zeros_like(traj_dist,dtype=float) #initialize output matrix
-    knn=(np.transpose(np.argsort(traj_dist,0))+1) #eturns the indices that would sort an array, transposed for consistent formatting
+    knn=(np.transpose(np.argsort(traj_dist,0))) #returns the indices that would sort an array, transposed for consistent formatting
     for i in range(0,(traj_dist.shape[0])): #go through the whole distance matrix and set the corresponding adjacencies
-        adj_mat[i,knn[i,range(1,k+1)]-1]=traj_dist[i,knn[i,range(1,k+1)]-1]
+        adj_mat[i,knn[i,range(1,k)]]=traj_dist[i,knn[i,range(1,k)]]
     return adj_mat
 
 #################################################
