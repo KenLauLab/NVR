@@ -139,7 +139,7 @@ def selection_val(traj_exp,adj_mat):
     print ("Start neighborhood variance calculation") 
     print ("Completion:")
     for i in range(0,r): #start of dev_ij calculation loop
-        #print (((i/r)*100),end='\r') #progress meter
+        print (((i/r)*100),end='\r') #progress meter
         for j in range(0,c):
             dev[i,j] = dev_ij(i,j,traj_exp,adj_mat) #this is the part that takes the longest
     print ("Finished neighborhood variance calculation")
