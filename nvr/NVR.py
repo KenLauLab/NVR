@@ -15,6 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.from __future__ import division,print_function
 
+from __future__ import division,print_function
 import numpy as np
 import scipy.spatial as sps
 import networkx as nx
@@ -65,7 +66,7 @@ def pwArcsinh(inputArray,constant):
     transformed=np.zeros_like(inputArray,dtype=float) #initialize the output array
     print ("Completion:")
     for i in range(0,inputArray.shape[0]):
-        #print (((i/inputArray.shape[0])*100),end='\r')#progress meter 
+        print (((i/inputArray.shape[0])*100),end='\r')#progress meter 
         holder[i,:]=(inputArray[i,:]/countsum[i])*constant #divide each genes counts by total number of counts in cell
         transformed[i,:]=np.arcsinh((holder[i,:]/constant*1000)) #do arcsinh transform for each element of matrix
     return transformed
