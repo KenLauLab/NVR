@@ -17,3 +17,12 @@ sudo pip install .
 ```python
 sudo pip install nvr
 ```
+
+### Installation for Windows
+In terminal, navigation to directory where you want to install NVR (e.g. d:\src)
+```
+cd d:\src
+git clone git://github.com/KenLauLab/NVR
+cd NVR
+pip install .
+```
