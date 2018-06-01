@@ -20,6 +20,8 @@ import numpy as np
 import scipy.spatial as sps
 import networkx as nx
 import time
+import h5py
+from sklearn.utils import shuffle
 
 #################################################
 
@@ -155,10 +157,12 @@ def selection_val(traj_exp,adj_mat):
 
 def select_genes(embedding):
     '''
-    Wrapper function to perform neighborhood variance based feature selection
+    Wrapper function to perform neighborhood variance based feature selection, will throw error if input is not ndarray
     :param embedding: ndarray representing gene expression, consists of cells as rows and genes as columns
     :return genes_mat: ndarray of selected genes
     '''
+    if not ( isinstance( embedding, np.ndarray)):
+        raise TypeError( 'data variable must be numpy ndarray')
     print ("Start min_conn_k")
     start=time.time() #just start a timer to see how long this whole thing takes in seconds
     k = min_conn_k(embedding) #run the min_conn_k to find k
@@ -179,3 +183,52 @@ def select_genes(embedding):
     #genes_mat = np.asmatrix(genes) #output of genes as a matrix
     print ("done")
     return np.squeeze( genes)
+
+#################################################
+
+def subsample(partitions,dataset,seed):
+    '''
+    Function to generate randomly sampled datasets with replacement. This is in the context of cells in the native dataset
+    which are the rows of the matrix
+    :param partitions: int designating the number of evenly spaced sample sizes to randomly select from the native dataset
+    :param dataset: DataFrame of the native dataset compatible with the suffle function
+    :param seed: pseudorandom seed, compatible with the replicate wrapper since it adds the index to the seed
+    :return subOut: dictionary of the randomly sampled datasets, keys are the number of cells
+    '''
+    parts=np.arange(dataset.shape[0]/partitions,dataset.shape[0],dataset.shape[0]/partitions).astype(int)    
+    subOut={}
+    for i in range(parts.shape[0]):
+        subOut["{0}cells".format(parts[i])]=np.asarray(shuffle(dataset,random_state=seed))[0:parts[i],:]
+    return subOut
+
+#################################################
+
+def subsampleReplicates(repNumber,partitions,dataset,seed):
+    '''
+    Wrapper function that generates replicate datasets using the subsampling function.
+    :param repNumber: int number of replicates to generate based on the parameters given
+    :param partitions: int designating the number of evenly spaced sample sizes to randomly select from the native dataset
+    :param dataset: DataFrame of the native dataset compatible with the suffle function
+    :param seed: pseudorandom seed, compatible with the replicate wrapper since it adds the index to the seed
+    :return repOut: nested dictionary of the randomly sampled datasets, keys are the replicate number
+    '''
+    repOut={}
+    for i in range(repNumber):
+        repOut["replicate{0}".format(i)]=subsample(partitions,dataset,seed+i)
+    return repOut
+
+#################################################
+
+def dictToFile(dictionary,replicateKey,outFileName):
+    '''
+    Function to write dictionary data, from subsampleReplicates, to file an hdf5 file. 
+    :param dictionary: nested dictionary returned by subsampleReplicates
+    :param replicateKey: string designating the replicate written to file
+    :param outFileName: string defining the hdf5 filename
+    '''
+    replicateToFile=h5py.File(outFileName,"w")
+    for i in range(len(dictionary[replicateKey])):
+        replicateToFile.create_dataset("{}".format(dictionary[replicateKey].keys()[i])\
+                                    ,data=dictionary[replicateKey].values()[i]\
+                                    ,compression="gzip")
+    replicateToFile.close()
