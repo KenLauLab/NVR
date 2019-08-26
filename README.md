@@ -4,7 +4,9 @@ Python implementation of NVR (neighborhood variance ratio) gene selection to sel
 
 ### Installation for Mac or Linux
 
-0. NVR requires igraph and scanpy for operation, so please see our [instructions](https://github.com/KenLauLab/pCreode) for the installation of these packages.
+0. 
+
+NVR requires igraph and scanpy for operation, so please see our [instructions](https://github.com/KenLauLab/pCreode) for the installation of these packages.
 
 There are two ways to install NVR with Mac/Linux operating systems.
 
