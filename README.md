@@ -19,7 +19,7 @@ pip install .
 
 2.
 ```python
-pip install nvr
+pip install nvr #this needs to be updated so avoid doing this for now
 ```
 
 ### Installation for Windows (in Anaconda3 environment)
