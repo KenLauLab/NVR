@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup( name='NVR',
-       version='0.0.6',
+       version='0.1.0',
        description='python implementation of gene feature selection used in Welch et al.,2016',
        url='https://github.com/KenLauLab/NVR',
        author='Bob Chen',
@@ -11,7 +11,8 @@ setup( name='NVR',
            'numpy>=1.11.0',
            'pandas>=0.17.1',
            'networkx',
-           'scipy>=0.17.0'
+           'scipy>=0.17.0',
+           'scanpy'
        ],
      )
 
