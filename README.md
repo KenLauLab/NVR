@@ -1,3 +1,6 @@
+[![PyPI version](https://badge.fury.io/py/NVR.svg)](https://badge.fury.io/py/NVR)
+[![Downloads](https://pepy.tech/badge/NVR)](https://pepy.tech/project/NVR)
+
 # **NVR (neighborhood variance ratio)**
 
 Python implementation of NVR (neighborhood variance ratio) gene selection to select genes with local and monotonic variation [(Welch et al., 2016)](https://www.ncbi.nlm.nih.gov/pubmed/27215581). The selected genes possess specific expression patterns over the entire data space amenable to trajectory analysis. Support for python 2 is now deprecated with version 0.1.0 scanpy integration, as scanpy requires python 3.
